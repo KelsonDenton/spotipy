@@ -298,6 +298,8 @@ class SpotipyLibraryApiTests(unittest.TestCase):
         resp = self.spotify.current_user_saved_episodes_contains(self.episode_ids)
         self.assertEqual(resp, [False, False])
 
+    
+
 
 class SpotipyUserApiTests(unittest.TestCase):
     @classmethod
@@ -452,6 +454,10 @@ class SpotipyFollowApiTests(unittest.TestCase):
         self.assertGreaterEqual(len(artists['items']), 0)
 
     def test_user_follows_and_unfollows_artist(self):
+
+        # Attempt to unfollow artist that does not follow
+        self.spotify.user_unfollow_artists(artists)
+
         # Initially follows 1 artist
         current_user_followed_artists = self.spotify.current_user_followed_artists()[
             'artists']['total']
@@ -469,6 +475,9 @@ class SpotipyFollowApiTests(unittest.TestCase):
 
     def test_user_follows_and_unfollows_user(self):
         users = ["11111204", "xlqeojt6n7on0j7coh9go8ifd"]
+
+        # Attempt to unfollow user that is not followed
+        self.spotify.user_unfollow_users(users)
 
         # Follow 2 more users
         self.spotify.user_follow_users(users)

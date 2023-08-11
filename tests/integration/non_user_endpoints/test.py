@@ -455,3 +455,9 @@ class AuthTestSpotipy(unittest.TestCase):
         self.assertTrue(isinstance(markets, list))
         self.assertIn("US", markets)
         self.assertIn("GB", markets)
+
+    def test_track_failure(self):
+        # pass no parameters and catch exception
+        self.assertRaises(SpotifyException, self.spotify.track())
+
+    
